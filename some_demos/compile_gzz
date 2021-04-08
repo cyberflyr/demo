@@ -1,0 +1,52 @@
+This XML file does not appear to have any style information associated with it. The document tree is shown below.
+<project>
+<actions/>
+<description/>
+<keepDependencies>false</keepDependencies>
+<properties>
+<com.dabsquared.gitlabjenkins.connection.GitLabConnectionProperty plugin="gitlab-plugin@1.5.11">
+<gitLabConnection/>
+</com.dabsquared.gitlabjenkins.connection.GitLabConnectionProperty>
+<org.bstick12.jenkinsci.plugins.leastload.LeastLoadDisabledProperty plugin="leastload@2.0.1">
+<leastLoadDisabled>false</leastLoadDisabled>
+</org.bstick12.jenkinsci.plugins.leastload.LeastLoadDisabledProperty>
+<com.sonyericsson.rebuild.RebuildSettings plugin="rebuild@1.29">
+<autoRebuild>false</autoRebuild>
+<rebuildDisabled>false</rebuildDisabled>
+</com.sonyericsson.rebuild.RebuildSettings>
+<hudson.model.ParametersDefinitionProperty>
+<parameterDefinitions>
+<hudson.model.StringParameterDefinition>
+<name>taskid</name>
+<description/>
+<defaultValue/>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+</parameterDefinitions>
+</hudson.model.ParametersDefinitionProperty>
+</properties>
+<scm class="hudson.scm.NullSCM"/>
+<assignedNode>mac_pro_4</assignedNode>
+<canRoam>false</canRoam>
+<disabled>false</disabled>
+<blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+<blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+<triggers/>
+<concurrentBuild>false</concurrentBuild>
+<builders>
+<hudson.tasks.Shell>
+<command>
+#!/bin/bash source ~/.bash_profile set -x echo ${WORKSPACE} while : do : done
+</command>
+</hudson.tasks.Shell>
+</builders>
+<publishers/>
+<buildWrappers>
+<hudson.plugins.ws__cleanup.PreBuildCleanup plugin="ws-cleanup@0.37">
+<deleteDirs>false</deleteDirs>
+<cleanupParameter/>
+<externalDelete/>
+<disableDeferredWipeout>false</disableDeferredWipeout>
+</hudson.plugins.ws__cleanup.PreBuildCleanup>
+</buildWrappers>
+</project>

@@ -1,0 +1,23 @@
+11c11
+< <leastLoadDisabled>false</leastLoadDisabled>
+---
+> <leastLoadDisabled>true</leastLoadDisabled>
+20c20
+< <name>taskid</name>
+---
+> <name>1</name>
+35c35
+< <concurrentBuild>false</concurrentBuild>
+---
+> <concurrentBuild>true</concurrentBuild>
+38,40c38
+< <command>
+< #!/bin/bash source ~/.bash_profile set -x echo ${WORKSPACE} while : do : done
+< </command>
+---
+> <command>echo "test1" sleep 60 echo "test2"</command>
+50a49,52
+> <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.8.10"/>
+> <hudson.plugins.ansicolor.AnsiColorBuildWrapper plugin="ansicolor@0.6.2">
+> <colorMapName>xterm</colorMapName>
+> </hudson.plugins.ansicolor.AnsiColorBuildWrapper>
