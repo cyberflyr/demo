@@ -16,6 +16,7 @@ class Single:
 
 
 if __name__ == '__main__':
-    cls1 = singleton
+    cls1 = Single()
+    cls2 = Single()
 
     print(cls1 is cls2)
