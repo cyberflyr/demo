@@ -5,13 +5,13 @@ RLock = threading.RLock()
 
 
 def a():
-    with RLock:
+    with Lock:
         b()
         c()
 
 
 def b():
-    with RLock:
+    with Lock:
         c()
         hello()
 

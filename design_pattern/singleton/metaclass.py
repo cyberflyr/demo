@@ -6,7 +6,6 @@ class Singleton(type):
 
     def __call__(cls, *args, **kwargs):
         if cls not in cls._instance:
-            s = super(Singleton, cls)
             cls._instance[cls] = super().__call__(cls, *args, **kwargs)
         return cls._instance[cls]
 
