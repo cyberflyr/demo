@@ -1,34 +1,33 @@
+from typing import List
 
 
-if __name__ == '__main__':
-    # A = [1, 2]
-    # # for item in A:
-    # #     print(id(item))
-    # # b = 1
-    # # print(id(b))
-    # B = lambda A: [x**2 for x in A]
-    # print(B(A))
-    # y = {x**2 for x in range(4)}
-    # print(y)
-    # print(type(y))
-    s = 'hellooo\n'
-    new_str = ''
-    last_c = None
-    times = 0
-    for c in s:
-        if c != last_c:
-            if times <= 1:
-                if last_c is not None:
-                    new_str += last_c
-            else:
-                new_str += f"/{times}{last_c}"
-            last_c = c
-            times = 1
+def find_closest_num(nums: List, target: int) -> int:
+    start = 0
+    end = len(nums) - 1
+    min_distance, min_index = float("inf"), float("inf")
+    while start <= end:
+        equal = False
+        mid = (start + end) >> 1
+        if nums[mid] < target:
+            start = mid + 1
+        elif nums[mid] > target:
+            end = mid - 1
         else:
-            times += 1
-    # #   结尾处理
-    # if times == 1:
-    #     new_str += f"{last_c}"
-    # else:
-    #     new_str += f"/{times}{last_c}"
-    print(new_str)
+            equal = True
+        while mid > 0 and nums[mid] == nums[mid - 1]:
+            mid -= 1
+        if equal:
+            return mid
+        distance = abs(nums[mid] - target)
+        if distance < min_distance:
+            min_distance = distance
+            min_index = mid
+
+    return min_index
+
+
+if __name__ == "__main__":
+    # nums = [1, 2, 2, 3, 4, 4, 5]  # target = 4
+    nums = [1, 2, 2, 3, 4, 4, 5]  # target = 5
+    # nums = [0, 0, 0, 0, 1]
+    print(find_closest_num(nums, 5))

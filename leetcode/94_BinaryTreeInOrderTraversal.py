@@ -34,5 +34,3 @@ class Solution:
                 l.append(root.val)
                 root = root.right
         return l
-
-

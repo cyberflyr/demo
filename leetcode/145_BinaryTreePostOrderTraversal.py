@@ -1,5 +1,5 @@
 # Definition for a binary tree node.
-from typing import List
+from typing import List, Optional
 
 
 class TreeNode:
@@ -12,6 +12,9 @@ class TreeNode:
 
 
 class Solution:
+    def __init__(self):
+        self.res = []
+
     # def inorderTraversal(self, root: TreeNode) -> List[int]:
     #     l = []
     #     if not root:
@@ -45,38 +48,31 @@ class Solution:
     #         else:
     #             root = None
     #     return l
-    def postorderTraversal(self, root: TreeNode) -> List[int]:
-        l = []
-        stack = []
-        if root is None:
+    # def postorderTraversal(self, root: TreeNode) -> List[int]:
+    #     l = []
+    #     stack = []
+    #     if root is None:
+    #         return []
+    #     while root or stack:
+    #         while root:
+    #             l.append(root.val)
+    #             stack.append(root)
+    #             root = root.right
+    #         if stack:
+    #             root = stack.pop()
+    #             root = root.left
+    #     return l[::-1]
+
+    # 非递归第二版
+    def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        if not root:
             return []
-        while root or stack:
-            while root:
-                l.append(root.val)
-                stack.append(root)
-                root = root.right
-            if stack:
-                root = stack.pop()
-                root = root.left
-        return l[::-1]
-
-
-if __name__ == '__main__':
-    tree_1 = TreeNode(1)
-    tree_2 = TreeNode(2)
-    tree_3 = TreeNode(3)
-    tree_4 = TreeNode(4)
-    tree_5 = TreeNode(5)
-    tree_6 = TreeNode(6)
-    tree_7 = TreeNode(7)
-    tree_8 = TreeNode(8)
-
-    tree_1.left = tree_2
-    tree_1.right = tree_3
-    tree_2.left = tree_4
-    tree_2.right = tree_5
-    tree_5.left = tree_7
-    tree_5.right = tree_8
-    tree_3.left = tree_6
-    print(Solution().postorderTraversal(tree_1))
-
+        stack = [root]
+        while stack:
+            root = stack.pop()
+            self.res.append(root.val)
+            if root.left:
+                stack.append(root.left)
+            if root.right:
+                stack.append(root.right)
+        return self.res[::-1]

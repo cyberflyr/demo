@@ -7,7 +7,8 @@ def gen():
         yield x
     yield 4
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     # gene = gen()
     # print(gene.__next__())
     # print(gene.__next__())
@@ -25,9 +26,8 @@ if __name__ == '__main__':
     def func():
         x = 1
         while True:
-            y = (yield x)
+            y = yield x
             x += y
-
 
     geniter = func()
     print(geniter.__next__())  # 1

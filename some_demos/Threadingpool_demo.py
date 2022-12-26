@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-__author__ = 'guozhuangzhi'
+__author__ = "guozhuangzhi"
 
 from queue import Queue
 import threading
@@ -46,7 +46,6 @@ def get_icon_multi(i):
 
 
 class myThread(threading.Thread):
-
     def __init__(self, task_queue):
         threading.Thread.__init__(self)
         self.task_queue = task_queue
@@ -73,7 +72,7 @@ def main():
     print(f"Finished in {end_time-start_time} s")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
     # print(len(IMAGE_LIST))
     # q = Queue()

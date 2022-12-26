@@ -1,4 +1,3 @@
-
 # def fast_sort(A: list, left: int, right: int):
 #     if left >= right:
 #         return
@@ -45,18 +44,18 @@ def partition(array, left, right):
             pos += 1
             array[pos], array[walker] = array[walker], array[pos]
         walker += 1
-    array[pos+1], array[right] = array[right], array[pos+1]
+    array[pos + 1], array[right] = array[right], array[pos + 1]
     return pos + 1
 
 
 def fast_sort(array, left, right):
-    if left > right:
+    if left < right:
         mid = partition(array, left, right)
-        fast_sort(array, left, mid-1)
-        fast_sort(array, mid+1, right)
+        fast_sort(array, left, mid - 1)
+        fast_sort(array, mid + 1, right)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     array = [2, 48, 50, 3, 5, 15, 44, 46, 27, 56, 19]
-    res = fast_sort(array, 0, len(array)-1)
+    res = fast_sort(array, 0, len(array) - 1)
     print(array)

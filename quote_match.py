@@ -1,4 +1,3 @@
-
 # '(', ')', '{', '}', '[' and ']'.
 # {}()[]
 # {[()[]]}
@@ -24,6 +23,7 @@
 #
 #         return False if stack else True
 
+
 class ListNode:
     def __init__(self, left, right):
         self.left = left
@@ -44,7 +44,6 @@ class Solution:
         return False
 
 
-if __name__ == '__main__':
-    s = '({}[)]'
+if __name__ == "__main__":
+    s = "({}[)]"
     print(Solution().isValid(s))
-

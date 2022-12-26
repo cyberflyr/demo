@@ -1,6 +1,4 @@
-
 class Singleton:
-
     def __init__(self, cls):
         self.cls = cls
         self._instance = {}
@@ -12,6 +10,7 @@ class Singleton:
             self._instance[self.cls] = self.cls(*args, **kwargs)
         return self._instance[self.cls]
 
+
 @Singleton
 class A:
     def __init__(self, name="gzz"):
@@ -19,7 +18,7 @@ class A:
         print(self.__class__.__name__)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     pass
     a = A()
     b = A()

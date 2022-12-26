@@ -1,4 +1,3 @@
-
 def singleton(cls):
     _instance = {}
 
@@ -6,16 +5,17 @@ def singleton(cls):
         if cls not in _instance:
             _instance[cls] = cls()
         return _instance[cls]
+
     return inner
 
 
 @singleton
 class Single:
     def __init__(self):
-        self.x = 'guozhuangzhi'
+        self.x = "guozhuangzhi"
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     cls1 = Single()
     cls2 = Single()
 

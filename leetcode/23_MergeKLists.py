@@ -17,26 +17,33 @@ class HeapSort:
 
     @staticmethod
     def _get_left_index(i):
-        return 2*i
+        return 2 * i
 
     @staticmethod
     def _get_right_index(i):
-        return 2*i + 1
+        return 2 * i + 1
 
     def smaller_than(self, ori, smallest):
-        ori_val = float('inf') if not ori else ori.val
-        smallest_val = float('inf') if not smallest else smallest.val
+        ori_val = float("inf") if not ori else ori.val
+        smallest_val = float("inf") if not smallest else smallest.val
         return ori_val < smallest_val
 
     def _min_heapify(self, i: int):
         left, right = self._get_left_index(i), self._get_right_index(i)
         smallest = i
-        if left < len(self.node_list) and self.smaller_than(self.node_list[left], self.node_list[smallest]):
+        if left < len(self.node_list) and self.smaller_than(
+            self.node_list[left], self.node_list[smallest]
+        ):
             smallest = left
-        if right < len(self.node_list) and self.smaller_than(self.node_list[right], self.node_list[smallest]):
+        if right < len(self.node_list) and self.smaller_than(
+            self.node_list[right], self.node_list[smallest]
+        ):
             smallest = right
         if smallest != i:
-            self.node_list[i], self.node_list[smallest] = self.node_list[smallest], self.node_list[i]
+            self.node_list[i], self.node_list[smallest] = (
+                self.node_list[smallest],
+                self.node_list[i],
+            )
             self._min_heapify(smallest)
 
     def build_min_heap(self):
@@ -50,6 +57,7 @@ class HeapSort:
             self.node_list[1] = self.node_list[1].next
             self._min_heapify(1)
         return res
+
 
 # Solution 1:
 # class Solution:
@@ -110,7 +118,7 @@ class Solution:
         return head
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     s = []
     n1 = ListNode(1)
     n2 = ListNode(4)

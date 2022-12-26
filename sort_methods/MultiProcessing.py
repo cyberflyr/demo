@@ -13,13 +13,13 @@ def multiprocessing_build():
     p = multiprocessing.Pool(4)
     for i in range(4):
         a = 0
-        p.apply_async(add, args=(i,a))
-    print('Waiting for all subprocess done...')
+        p.apply_async(add, args=(i, a))
+    print("Waiting for all subprocess done...")
     p.close()
     p.join()
     # end_time = datetime.datetime.now()
     # print(f"Multithreading finished in {end_time - start_time}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     multiprocessing_build()

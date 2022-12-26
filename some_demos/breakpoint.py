@@ -2,6 +2,7 @@ def twice(n):
     n *= 2
     return n
 
+
 a = int(input("a:"))
 b = int(input("b:"))
 print(a)

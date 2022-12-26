@@ -1,11 +1,13 @@
-
 def singleton(cls):
     __instance = {}
+
     def inner(*args, **kwargs):
         if cls not in __instance:
             __instance[cls] = cls(*args, **kwargs)
         return __instance[cls]
+
     return inner
+
 
 @singleton
 class Queue:
@@ -22,7 +24,7 @@ class Queue:
         print(self.queue)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     queue = Queue([123])
     print(id(queue))
     queue = Queue([123])

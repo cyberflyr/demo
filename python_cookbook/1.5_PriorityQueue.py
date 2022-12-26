@@ -24,10 +24,10 @@ class Item:
         return f"Item({self.name})"
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     q = PriorityQueue()
-    q.push(Item('foo'), 1)
-    q.push(Item('bar'), 5)
-    q.push(Item('hello'), 3)
+    q.push(Item("foo"), 1)
+    q.push(Item("bar"), 5)
+    q.push(Item("hello"), 3)
     print(q.pop())
     print(q._queue)

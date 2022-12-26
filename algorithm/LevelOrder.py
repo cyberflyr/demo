@@ -1,5 +1,3 @@
-
-
 class TreeNode:
     def __init__(self, val, left=None, right=None):
         self.val = val
@@ -49,7 +47,7 @@ def level_order(root: TreeNode):
 # [4, 6, 2, 1, 3, 5, 7]
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     t1 = TreeNode(1)
     t2 = TreeNode(2)
     t3 = TreeNode(3)

@@ -2,9 +2,10 @@
 # -*- coding: utf-8 -*-
 
 from socket import *
+
 serverPort = 12000
 serverSocket = socket(AF_INET, SOCK_STREAM)
-serverSocket.bind(('localhost', serverPort))
+serverSocket.bind(("localhost", serverPort))
 serverSocket.listen(1)
 print("The server is ready to receive.")
 while True:
@@ -14,5 +15,3 @@ while True:
     modifiedSentence = bytes.decode(sentence).upper()
     connectionSocket.send(modifiedSentence.encode())
     connectionSocket.close()
-
-

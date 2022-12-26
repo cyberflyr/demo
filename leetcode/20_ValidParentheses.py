@@ -1,20 +1,15 @@
 class Solution:
-
     @staticmethod
     def _get_predecessor(character):
-        d = {
-            ')': '(',
-            ']': '[',
-            '}': '{'
-        }
+        d = {")": "(", "]": "[", "}": "{"}
         return d[character]
 
     def isValid(self, s: str) -> bool:
         stack = []
         for character in s:
-            if character in ['(', '[', '{']:
+            if character in ["(", "[", "{"]:
                 stack.append(character)
-            elif character in [')', ']', '}']:
+            elif character in [")", "]", "}"]:
                 try:
                     if stack[-1] != self._get_predecessor(character):
                         return False
@@ -27,6 +22,6 @@ class Solution:
         return False
 
 
-if __name__ == '__main__':
-    s = '()'
+if __name__ == "__main__":
+    s = "()"
     print(Solution().isValid(s))

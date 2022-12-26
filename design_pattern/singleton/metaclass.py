@@ -1,5 +1,3 @@
-
-
 class Singleton(type):
 
     _instance = {}
@@ -15,7 +13,7 @@ class A(metaclass=Singleton):
         pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     a = A()
     b = A()
     print(a is b)

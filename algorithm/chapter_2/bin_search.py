@@ -14,6 +14,6 @@ def bin_search(l: list, target):
     return pos
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     u_list = [0, 1, 2, 3, 4, 5]
     print(bin_search(u_list, 4))

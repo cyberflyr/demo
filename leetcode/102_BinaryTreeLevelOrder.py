@@ -10,7 +10,6 @@ class TreeNode:
 
 
 class Solution:
-
     def levelOrder(self, root: TreeNode) -> List[List[int]]:
         all_, level_ = [], []
         sequence = []
@@ -40,7 +39,7 @@ class Solution:
         return all_
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     tree_1 = TreeNode(3)
     tree_2 = TreeNode(9)
     tree_3 = TreeNode(20)

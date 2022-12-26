@@ -35,25 +35,31 @@ async def save_photo(session, url, i):
         # print(response)
         # print(response.content)
         # return response.content
-    # print(r.content)
+        # print(r.content)
         with open(f"{image_folder}/icon_{i}.png", "wb") as f:
             f.write(await response.read())
     print(f"{i} used {datetime.datetime.now()-start_time}")
 
+
 # 利用asyncio.create_task创建并行任务
 async def corun():
-    async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(limit=50, ssl=False)) as session:
+    async with aiohttp.ClientSession(
+        connector=aiohttp.TCPConnector(limit=50, ssl=False)
+    ) as session:
         print(f'started at {time.strftime("%X")}')
         start_time = datetime.datetime.now()
         tasks = []
         for i in range(len(IMAGE_LIST)):
-            task = asyncio.create_task(save_photo(session, IMAGE_LIST[i], i))  # 模拟执行1秒的任务
+            task = asyncio.create_task(
+                save_photo(session, IMAGE_LIST[i], i)
+            )  # 模拟执行1秒的任务
             tasks.append(task)
         # 等待两个任务都完成，两个任务是并行的，所以总时间两个任务中最大的执行时间
         await asyncio.gather(*tasks)
         end_time = datetime.datetime.now()
-        print(end_time-start_time)
+        print(end_time - start_time)
         print(f'finished at {time.strftime("%X")}')
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     asyncio.run(corun())

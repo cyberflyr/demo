@@ -32,15 +32,15 @@ def merge_sort(A, start, stop):
         return
     mid = (start + stop) >> 1
     merge_sort(A, start, mid)
-    merge_sort(A, mid+1, stop)
+    merge_sort(A, mid + 1, stop)
     merge(A, start, mid, stop)
 
 
 def merge(A, start, mid, stop):
-    l_left = A[start:mid+1]
-    l_right = A[mid+1:stop+1]
-    l_left.append(float('inf'))
-    l_right.append(float('inf'))
+    l_left = A[start : mid + 1]
+    l_right = A[mid + 1 : stop + 1]
+    l_left.append(float("inf"))
+    l_right.append(float("inf"))
     i, j = 0, 0
     k = start
     while k <= stop:
@@ -53,9 +53,9 @@ def merge(A, start, mid, stop):
         k += 1
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     u_list = [2, 4, 5, 7, 1, 2, 3, 6, 9]
     # print(u_list[1:2])
     # print(MergeSort(u_list).merge_sort(0, len(u_list)-1))
-    print(merge_sort(u_list, start=0, stop=len(u_list)-1))
+    print(merge_sort(u_list, start=0, stop=len(u_list) - 1))
     print(u_list)

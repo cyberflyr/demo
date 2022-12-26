@@ -3,9 +3,10 @@
 import time
 
 from socket import *
-if __name__ == '__main__':
 
-    serverName = 'localhost'
+if __name__ == "__main__":
+
+    serverName = "localhost"
     serverPort = 12000
 
     for i in range(10):
@@ -17,5 +18,3 @@ if __name__ == '__main__':
         print(bytes.decode(modifiedSentence))
         time.sleep(0.5)
         clientSocket.close()
-
-

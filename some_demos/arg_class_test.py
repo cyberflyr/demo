@@ -13,14 +13,14 @@ class Connector:
     @property
     def connector(self):
         connect_to = None
-        if self.cls_type == 'Enum1':
+        if self.cls_type == "Enum1":
             connect_to = Enum1
-        elif self.cls_type == 'Enum2':
+        elif self.cls_type == "Enum2":
             connect_to = Enum2
         return connect_to() if connect_to else None
 
 
-if __name__ == '__main__':
-    val = input('which class?')
+if __name__ == "__main__":
+    val = input("which class?")
     connector = Connector(val).connector
     print(connector)

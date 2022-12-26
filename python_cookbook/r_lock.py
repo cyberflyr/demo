@@ -24,7 +24,7 @@ def hello():
     print("hello")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
         threading.Thread(target=a, args=()).start()
         threading.Thread(target=b, args=()).start()
@@ -32,4 +32,5 @@ if __name__ == '__main__':
         print(e)
 
     import time
+
     time.sleep(5)

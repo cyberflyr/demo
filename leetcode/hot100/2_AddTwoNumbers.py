@@ -4,6 +4,7 @@ class ListNode:
         self.val = val
         self.next = next
 
+
 class Solution:
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
         overflow, l, head = 0, None, None
@@ -28,7 +29,7 @@ class Solution:
         return head
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     num_2 = ListNode(9)
     num_4 = ListNode(9)
@@ -44,6 +45,3 @@ if __name__ == '__main__':
 
     res = Solution().addTwoNumbers(l1, l2)
     print(res)
-
-
-

@@ -9,13 +9,13 @@ def countdown(n):
             n -= 1
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     c = countdown(5)
     print(type(c))
     x = c.__next__()
     print(x)
     if x == 5:
-        x = c.send(3)   #send之后会继续执行方法
+        x = c.send(3)  # send之后会继续执行方法
         print(x)
     x = c.__next__()
     print(x)

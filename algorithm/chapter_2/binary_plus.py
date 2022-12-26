@@ -1,4 +1,3 @@
-
 def binary_plus(l1: list, l2: list):
     # l1, l2 each bit of binary num , from low to high position
     if not l1 or not l2:
@@ -22,7 +21,8 @@ def binary_plus(l1: list, l2: list):
         l3.append(overflow)
     return l3
 
-if __name__ == '__main__':
-    l1 = [1,1,1]
-    l2 = [0,0,1]
+
+if __name__ == "__main__":
+    l1 = [1, 1, 1]
+    l2 = [0, 0, 1]
     print(binary_plus(l1, l2))

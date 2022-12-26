@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-__author__ = 'guozhuangzhi'
+__author__ = "guozhuangzhi"
 
 import os, requests, threading, datetime
 import multiprocessing
@@ -34,7 +34,7 @@ def get_icon_multi(i):
     start_time = datetime.datetime.now()
     image_folder = os.path.abspath(os.path.dirname(__file__))
     r = requests.get(IMAGE_LIST[i])
-    print('request use:',datetime.datetime.now()-start_time)
+    print("request use:", datetime.datetime.now() - start_time)
     # print(r.content)
     with open(f"{image_folder}/icon_{i}.png", "wb") as f:
         f.write(r.content)
@@ -46,7 +46,7 @@ def get_icon_normal():
     for i in range(len(IMAGE_LIST)):
         req_start_time = datetime.datetime.now()
         r = requests.get(IMAGE_LIST[i])
-        print('request use:', datetime.datetime.now() - req_start_time)
+        print("request use:", datetime.datetime.now() - req_start_time)
         with open(f"{image_folder}/icon_{i+100}.jpg", "wb") as f:
             f.write(r.content)
     end_time = datetime.datetime.now()
@@ -71,14 +71,14 @@ def multiProcessing_build():
     p = multiprocessing.Pool(4)
     for i in range(len(IMAGE_LIST)):
         p.apply_async(get_icon_multi, args=(i,))
-    print('Waiting for all subprocess done...')
+    print("Waiting for all subprocess done...")
     p.close()
     p.join()
     end_time = datetime.datetime.now()
     print(f"Multithreading finished in {end_time - start_time}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # get_icon_normal()
     multithreading_build()
     # multiProcessing_build()

@@ -1,9 +1,10 @@
 from dataclasses import dataclass
 
+
 @dataclass()
 class TreeNode:
-    parent:  None
-    left:  None
+    parent: None
+    left: None
     right: None
 
 

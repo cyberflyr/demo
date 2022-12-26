@@ -1,0 +1,202 @@
+Parameters:
+  VpcCIDR:
+    Type: String
+    Default: 10.4.0.0/16
+  PublicSubnetCIDR:
+    Type: String
+    Default: 10.4.0.0/24
+  PrivateSubnetCIDR:
+    Type: String
+    Default: 10.4.1.0/24
+  KeyName:
+    Type: AWS::EC2::KeyPair::KeyName
+  AZ:
+    Type: String
+    Default: us-east-1a
+  IAMRole:
+    Type: String
+    Default: dev-node-iam-01
+  InstanceType:
+    Type: String
+    Default: t2.micro
+    AllowedValues:
+    - t2.micro
+  ImageId:
+    Type: String
+    Default: ami-0305e80423da76348
+
+Resources:
+  MyVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: !Ref VpcCIDR
+      InstanceTenancy: default
+      Tags:
+        - Key: "Name"
+          Value: "is-zhuangzhi-VPC-02"
+  PublicSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref MyVPC
+      CidrBlock: !Ref PublicSubnetCIDR
+      AvailabilityZone: !Ref AZ
+      Tags:
+        - Key: "Name"
+          Value: "is-zhuangzhi-sn-pub-02"
+  PrivateSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref MyVPC
+      CidrBlock: !Ref PrivateSubnetCIDR
+      AvailabilityZone: !Ref AZ
+      Tags:
+        - Key: "Name"
+          Value: "is-zhuangzhi-sn-pvt-02"
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: "Name"
+          Value: "is-zhuangzhi-igw-02"
+  InternetGatewayAttachVPC:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref MyVPC
+      InternetGatewayId: !Ref InternetGateway
+  NATGateway:
+    Type: AWS::EC2::NatGateway
+    DependsOn: ElasticIP
+    Properties:
+      SubnetId: !Ref PublicSubnet
+      AllocationId: !GetAtt ElasticIP.AllocationId
+      ConnectivityType: public
+      Tags:
+        - Key: "Name"
+          Value: "is-zhuangzhi-nat-02"
+  ElasticIP:
+    Type: AWS::EC2::EIP
+    DependsOn: MyVPC
+    Properties:
+      Domain: vpc
+  PublicRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref MyVPC
+      Tags:
+        - Key: "Name"
+          Value: "is-zhuangzhi-rt-pub-02"
+  PublicRouteTableAttachSubnet:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref PublicSubnet
+      RouteTableId: !Ref PublicRouteTable
+  PrivateRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref MyVPC
+      Tags:
+        - Key: "Name"
+          Value: "is-zhuangzhi-rt-pvt-02"
+  PrivateRouteTableAttachSubnet:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref PrivateSubnet
+      RouteTableId: !Ref PrivateRouteTable
+  PrivateRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref PrivateRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId: !Ref NATGateway
+  PublicRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref InternetGateway
+  PublicSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      VpcId: !Ref MyVPC
+      GroupDescription: "For zhuangzhi task"
+      SecurityGroupEgress:
+        FromPort: -1
+        ToPort: -1
+        IpProtocol: -1
+        CidrIp: 0.0.0.0/0
+      SecurityGroupIngress:
+        CidrIp: 0.0.0.0/0
+        FromPort: 22
+        ToPort: 22
+        IpProtocol: tcp
+      GroupName: is-zhuangzhi-sg-pub-02
+      Tags:
+        - Key: "Name"
+          Value: "is-zhuangzhi-sg-pub-02"
+  PrivateSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      VpcId: !Ref MyVPC
+      GroupDescription: "For zhuangzhi task"
+      SecurityGroupIngress:
+        CidrIp: 10.4.0.0/16
+        FromPort: 22
+        ToPort: 22
+        IpProtocol: tcp
+      SecurityGroupEgress:
+        CidrIp: 0.0.0.0/0
+        FromPort: -1
+        ToPort: -1
+        IpProtocol: -1
+      GroupName: is-zhuangzhi-sg-pvt-02
+      Tags:
+        - Key: "Name"
+          Value: "is-zhuangzhi-sg-pvt-02"
+  PublicInstance:
+    Type: AWS::EC2::Instance
+    DependsOn:
+      - PublicRouteTableAttachSubnet
+      - MyVPC
+      - NATGateway
+    Properties:
+      InstanceType: !Ref InstanceType
+      KeyName: !Ref KeyName
+      IamInstanceProfile: !Ref IAMRole
+      NetworkInterfaces:
+        - AssociatePublicIpAddress: "true"
+          DeviceIndex: "0"
+          GroupSet:
+            - !GetAtt "PublicSecurityGroup.GroupId"
+          SubnetId:
+            Ref: "PublicSubnet"
+      ImageId: !Ref ImageId
+      Tags:
+        - Key: "Name"
+          Value: "is-zhuangzhi-ec2-pub-02"
+  PrivateInstance:
+    Type: AWS::EC2::Instance
+    DependsOn:
+      - PrivateRouteTableAttachSubnet
+      - MyVPC
+      - NATGateway
+    Properties:
+      InstanceType: !Ref InstanceType
+      KeyName: !Ref KeyName
+      IamInstanceProfile: !Ref IAMRole
+      NetworkInterfaces:
+        - AssociatePublicIpAddress: "false"
+          DeviceIndex: "0"
+          GroupSet:
+            - !GetAtt "PrivateSecurityGroup.GroupId"
+          SubnetId: !Ref PrivateSubnet
+      ImageId: !Ref ImageId
+      Tags:
+        - Key: "Name"
+          Value: "is-zhuangzhi-ec2-pvt-02"
+      UserData:
+        Fn::Base64: |
+          #!/bin/bash
+          cd /tmp
+          aws s3 cp s3://is-zhuangzhi-bucket-01/interview/bootstrap.sh .
+          chmod +x ./bootstrap.sh
+          ./bootstrap.sh

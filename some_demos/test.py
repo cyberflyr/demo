@@ -10,8 +10,9 @@
 
 
 def hhh():
-    s = Hello('guozhuangzhi')
+    s = Hello("guozhuangzhi")
     s.print_out()
+
 
 class Hello:
     def __init__(self, name):
@@ -23,7 +24,8 @@ class Hello:
     def say_hi(self):
         hhh()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     # ge([0, 0, 1])
     # import time, os
     # sf = int(time.time())
@@ -39,7 +41,7 @@ if __name__ == '__main__':
     #     pass
     # print(index)
     i = 50000000000000
-    b = float('inf')
-    print(i<b)
+    b = float("inf")
+    print(i < b)
     # i = [0,1,2,3]
     # print(i[1:1], i[1:2])
